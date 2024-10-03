@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int>quickSort(vector<int>nums){
+    int n=nums.size();
+    if(n==1 || n==0){return nums;}
+    int pivot=nums[n/2];
+    vector<int>left,middle,right;
+    vector<int>result={};
+    for(int i=0;i<n;i++){
+        int element=nums[i];
+        if(element<pivot){left.push_back(element);}
+        else if(element==pivot){middle.push_back(element);}
+        else {right.push_back(element);}
+    }
+left=quickSort(left);
+right=quickSort(right);
+result.insert(result.end(),left.begin(),left.end());
+result.insert(result.end(),middle.begin(),middle.end());
+result.insert(result.end(),right.begin(),right.end());
+return result;}
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m=nums1.size();
+        int n=nums2.size();
+        int p=n+m;
+        vector<int>nums;
+        nums.insert(nums.end(),nums1.begin(),nums1.end());
+        nums.insert(nums.end(),nums2.begin(),nums2.end());
+        nums=quickSort(nums);
+        float median;
+        if(p%2==0){
+            median=static_cast<float>(nums[p/2-1]+nums[p/2])/2;
+        }
+        else{
+            median=nums[p/2];
+        }
+    return median;}
+};
